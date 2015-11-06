@@ -1,0 +1,20 @@
+{% extends "bootstrap/base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "bootstrap/utils.html" as util %}
+
+{% block title %}SAML Metadata Uploader{% endblock %}
+
+{% block content %}
+<div class="jumbotron">
+    <div class="container">
+        <h1>Ready to start testing?</h1>
+
+        <p>Upload your IdP's SAML metadata and begin!</p>
+        {{ wtf.quick_form(form) }}
+    </div>
+
+    <div class="container">
+        {{ util.flashed_messages() }}
+    </div>
+</div>
+{% endblock %}

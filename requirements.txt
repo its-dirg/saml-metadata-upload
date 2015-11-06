@@ -1,0 +1,6 @@
+Flask==0.10.1
+flask-transfer==0.0.1
+Flask-WTF==0.12
+Flask-Bootstrap==3.3.5.7
+lxml==3.4.4
+gunicorn==19.3.0
