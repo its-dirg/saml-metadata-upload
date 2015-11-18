@@ -10,8 +10,8 @@ from upload_service.service import random_string, SAMLMetadataUploadForm, \
     SAMLMetadataUpload
 
 app = Flask(__name__)
-app.config['UPLOAD_DIRECTORY'] = os.environ.get('METADATA_UPLOAD_DIR', 'metadata_uploads')
-app.secret_key = os.environ.get('METADATA_SECRET_KEY', random_string())
+app.config['UPLOAD_DIRECTORY'] = os.environ.get('MD_UPLOAD_DIR', 'metadata_uploads')
+app.secret_key = os.environ.get('MD_UPLOAD_SECRET', random_string())
 app.wsgi = Bootstrap(app)
 
 
