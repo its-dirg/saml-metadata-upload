@@ -10,7 +10,7 @@ from flask_wtf.form import Form
 from werkzeug.utils import secure_filename
 from wtforms.fields.simple import SubmitField
 
-from upload_service.validation import SAMLMetadataValidator
+from metadata_upload.validation import SAMLMetadataValidator
 
 ALLOWED_EXTENSIONS = ['xml']
 

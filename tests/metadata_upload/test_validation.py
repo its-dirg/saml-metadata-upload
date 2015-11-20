@@ -4,7 +4,7 @@ from io import BytesIO
 import pytest
 from flask_transfer.exc import UploadError
 
-from upload_service.validation import SAMLMetadataValidator
+from metadata_upload.validation import SAMLMetadataValidator
 
 
 class TestSAMLMetadataValidator():

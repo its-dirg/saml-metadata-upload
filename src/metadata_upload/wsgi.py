@@ -6,7 +6,7 @@ from flask.templating import render_template
 from flask_bootstrap import Bootstrap
 from flask_transfer.exc import UploadError
 
-from upload_service.service import random_string, SAMLMetadataUploadForm, \
+from metadata_upload.service import random_string, SAMLMetadataUploadForm, \
     SAMLMetadataUpload
 
 app = Flask(__name__)

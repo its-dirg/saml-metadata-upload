@@ -3,13 +3,13 @@ from io import BytesIO
 
 import pytest
 
-import upload_service.wsgi
+from metadata_upload.wsgi import app
 
 
 class TestFileUploadService():
     @pytest.fixture(autouse=True)
     def create_flask_test_client(self, tmpdir):
-        self.app = upload_service.wsgi.app
+        self.app = app
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['TESTING'] = True
         self.app.config['UPLOAD_DIRECTORY'] = tmpdir.strpath
