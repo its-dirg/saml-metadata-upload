@@ -15,7 +15,7 @@ app.secret_key = os.environ.get('MD_UPLOAD_SECRET', random_string())
 Bootstrap(app)
 
 
-@app.route('/upload', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def upload():
     form = SAMLMetadataUploadForm()
 

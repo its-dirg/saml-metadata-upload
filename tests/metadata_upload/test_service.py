@@ -2,20 +2,29 @@ import os
 from io import BytesIO
 
 import pytest
+from flask import url_for
 
 from metadata_upload.wsgi import app
 
 
+@pytest.fixture(scope="session")
+def upload_endpoint():
+    with app.test_request_context():
+        return url_for('upload')
+
+
 class TestFileUploadService():
     @pytest.fixture(autouse=True)
-    def create_flask_test_client(self, tmpdir):
+    def create_flask_test_client(self, upload_endpoint, tmpdir):
         self.app = app
         self.app.config['WTF_CSRF_ENABLED'] = False
         self.app.config['TESTING'] = True
         self.app.config['UPLOAD_DIRECTORY'] = tmpdir.strpath
 
+        self.upload_endpoint = upload_endpoint
+
     def test_renders_upload_page(self):
-        html_page = self.response_content(self.app.test_client().get('/upload'))
+        html_page = self.response_content(self.app.test_client().get(self.upload_endpoint))
         assert 'enctype="multipart/form-data"' in html_page
         assert 'type=\"file\"' in html_page
         assert 'Upload' in html_page
@@ -67,7 +76,7 @@ class TestFileUploadService():
         assert 'Invalid SAML metadata.' in self.response_content(resp)
 
     def test_rejects_empty_POST(self):
-        resp = self.app.test_client().post('/upload')
+        resp = self.app.test_client().post(self.upload_endpoint)
         assert 'Error in the &#39;Upload metadata&#39; field - This field is required.' in self.response_content(
             resp)
 
@@ -89,4 +98,5 @@ class TestFileUploadService():
         return response.data.decode('utf-8')
 
     def post_to_upload_endpoint(self, filedata, filename):
-        return self.app.test_client().post('/upload', data={'uploaded_file': (filedata, filename)})
+        return self.app.test_client().post(self.upload_endpoint,
+                                           data={'uploaded_file': (filedata, filename)})
