@@ -12,7 +12,7 @@ from metadata_upload.service import random_string, SAMLMetadataUploadForm, \
 app = Flask(__name__)
 app.config['UPLOAD_DIRECTORY'] = os.environ.get('MD_UPLOAD_DIR', 'metadata_uploads')
 app.secret_key = os.environ.get('MD_UPLOAD_SECRET', random_string())
-app.wsgi = Bootstrap(app)
+Bootstrap(app)
 
 
 @app.route('/upload', methods=['GET', 'POST'])
